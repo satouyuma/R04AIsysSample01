@@ -15,6 +15,8 @@ public class Sentiment {
 		Senti message = getSentiment("Stepover Toehold With Facelock");
 		if (message != null) {
 			System.out.println(message.documents[0].confidenceScores.positive);
+			System.out.println(message.documents[0].confidenceScores.neutral);
+			System.out.println(message.documents[0].confidenceScores.negative);
 		}
 	}
 
@@ -59,9 +61,9 @@ class Document {
 }
 
 class ConfidenceScores {
-	double positive;
-	double neutral;
 	double negative;
+	double neutral;
+	double positive;
 }
 
 class Sour {
