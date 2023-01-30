@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ResultServlet
  */
-@WebServlet("/result")
-public class ResultServlet extends HttpServlet {
+@WebServlet("/sentimentresult")
+public class SentimentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ResultServlet() {
+	public SentimentServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -32,10 +32,10 @@ public class ResultServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String string = "生姜焼定食";
 		try {
-			Language result = Json05.getLanguage(string);
-			String message = result.documents[0].detectedLanguage.name;
+			Senti result = Sentiment.getSentiment(string);
+			double message = result.documents[0].confidenceScores.positive;
 			request.setAttribute("message", message);
-			request.getRequestDispatcher("/WEB-INF/jsp/result.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/jsp/sentimentresult.jsp").forward(request, response);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {
@@ -54,10 +54,14 @@ public class ResultServlet extends HttpServlet {
 		request.setAttribute("string", string);
 
 		try {
-			Language result = Json05.getLanguage(string);
-			String message = result.documents[0].detectedLanguage.name;
+			Senti result = Sentiment.getSentiment(string);
+			double message = result.documents[0].confidenceScores.positive;
+			double message1 = result.documents[0].confidenceScores.neutral;
+			double message2 = result.documents[0].confidenceScores.negative;
 			request.setAttribute("message", message);
-			request.getRequestDispatcher("/WEB-INF/jsp/result.jsp").forward(request, response);
+			request.setAttribute("message1", message1);
+			request.setAttribute("message2", message2);
+			request.getRequestDispatcher("/WEB-INF/jsp/sentimentresult.jsp").forward(request, response);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {

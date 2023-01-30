@@ -10,8 +10,8 @@
 <body>
 <h1>CognitiveServiceを使うサイト(Sentiment)</h1>
 
-<h3></h3>
-<form method="POST" action="./result">
+<h3>センチメントを表示したい文字列を入力してください</h3>
+<form method="POST" action="./sentimentresult">
 <input type="TEXT" name="string" />
 <input type="submit" />
 </form>
